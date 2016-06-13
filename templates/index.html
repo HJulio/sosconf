@@ -1,0 +1,142 @@
+<!DOCTYPE html >
+<html lang="es">
+<head>
+	<meta property="og:url"           content="http://conf.sos48.com/">
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Generador de confirmaciones SOS4.8"/>
+    <meta property="og:description"   content="Confírmate, confirma a tus amigos, o confirma a la Estrella Levante fresquita que te vas a tomar en el SOS 4.8. #yovoyalSOS"/>
+    <meta property="og:image"         content="http://conf.sos48.com/static/images/muestra.png" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@SOS48Festival">
+    <meta name="twitter:title" content="Generador de confirmaciones SOS4.8">
+    <meta name="twitter:description" content="Confírmate, confirma a tus amigos, o confirma a la Estrella Levante fresquita que te vas a tomar en el SOS 4.8. #yovoyalSOS">
+    <meta name="twitter:image" content="http://conf.sos48.com/static/images/muestra.png">
+		<title>Generador de confirmaciones del SOS4.8</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href={{ url_for('static', filename='css/sosconf.css') }} rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src={{ url_for('static', filename='bootstrap-maxlength.js') }}></script>
+		<script src={{ url_for('static', filename='locatis.js') }}></script>
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-713167-3', 'auto');
+		  ga('send', 'pageview');
+
+	</script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="col-lg-6 col-sm-6 col-xs-6">
+           <h3 class="headertext">#yovoyalSOS</h3>
+        </div>
+        <div class="col-lg-6 col-sm-6 col-xs-6">
+           <img src={{ url_for('static', filename='images/logo.png') }} width="20%" class="logoimg">
+        </div>
+    </div>
+    <hr/>
+    {% block body %}
+    <div class="titulo-container">
+            <h3 class="titulo">¿Vas al SOS 4.8?</h3>
+            <p>Auto-confírmate, confirma a tus amigos o si quieres, a la Estrella Levante fría que te vas a tomar en los conciertos.</p>
+    </div>
+
+    <div class="container">
+        <div class="col-lg-8">
+            <form action="upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="control-label">Tu título</label>
+                    <input type="text" maxlength="17" class="form-control" name="texto1" placeholder="Título" id="texto1">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Subtítulo</label>
+                    <input type="text" maxlength="30" class="form-control" name="texto2" placeholder="Subtítulo" id="texto2">
+                </div>
+								<div>
+								<div class="form-group" style="display:inline">
+									<button class="btn btn-facebook fb-login"><i class="fa fa-facebook"></i> Usa tu foto de Facebook</button>
+									<input class="fb-file" type="hidden" name="filefb" value="no">
+								</div>
+							</div>
+								<div>
+                        <div class="form-group" style="display:inline">
+                           <label class="control-label">O sube una foto</label>
+                           <input class="reg-file" type="file" name="file">
+                        </div>
+                </div>
+                    <div class="form-group">
+                         <input class="btn btn-primary botonfinal btn-vuelta listo" type="submit" value="¿Listo?">
+										</div>
+            </form>
+        </div>
+        <div class="col-lg-4">
+           <img src={{ url_for('static', filename='images/muestra.png') }} width="90%" class="muestraimg">
+        </div>
+</div>
+    {% endblock %}
+
+</div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('input#texto1').maxlength({
+            alwaysShow: true,
+            threshold: 15,
+            warningClass: "label label-success",
+            limitReachedClass: "label label-danger",
+            separator: ' / ',
+            preText: '',
+            postText: ' caracteres.'
+        });
+    });
+        $(document).ready(function () {
+        $('input#texto2').maxlength({
+            alwaysShow: true,
+            threshold: 15,
+            warningClass: "label label-success",
+            limitReachedClass: "label label-danger",
+            separator: ' / ',
+            preText: '',
+            postText: ' caracteres.'
+        });
+    });
+</script>
+
+<script>
+		$(document).ready(function () {
+				$('.fb-login').on('click', function (e) {
+						e.preventDefault();
+						authUser();
+						$('.fb-login').html('<i class="fa fa-facebook"></i> Sesión iniciada, todo listo');
+
+						$('.listo').val('¡Confirmar!');
+				});
+		});
+
+</script>
+
+<footer class="footer">
+    <div class="container text-center">
+        <p class="text-muted credit">SOS 4.8 - 2016</p>
+				<div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle avisolegal" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    Aviso legal
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li class="avisolegal">1. Al hacer click y usar la aplicación consientes que la imagen subida sea tratada, y que la imagen generada se almacene en servidores de terceros, únicamente a efectos de almacenamiento, posibilitando que el usuario la comparta. Si el usuario quiere ejercitar sus derechos de ARCO, deberá remitir un correo a hola@sos48.com.</li>
+				    <li class="avisolegal">2. Legalmusic en Vivo S. L. no se hace responsable del resultado de la aplicación y del uso de las imágenes generadas.</li>
+				    <li class="avisolegal">3. No obstante, Legalmusic en Vivo S. L. se reserva el derecho a eliminar de los servidores imágenes cuyo contenido sea contrario a la política y moral de la empresa, al orden público o a la ley. Cualquier utilización de la imagen, asociada al festival SOS 4.8, que dañe la reputación podrá dar lugar al ejercicio de acciones judiciales.</li>
+				  </ul>
+				</div>
+    </div>
+</footer>
+</html>
